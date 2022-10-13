@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            width: 500px;
+            min-height: 100px;
+            border: solid 2px black;
+            margin: auto;
+            text-align: center;
+        }
+        .messages{
+            width: 80%;
+            min-height: 40px;
+            margin: auto;
+            border: solid 2px black;
+            display: none;
+        }
+        a{
+            display: block;
+            text-decoration: unset;
+            color: black;
+            margin: 10px auto;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <section>
+        <input type="number" name="" id="linksNumber" min="0" placeholder="Number of Links">
+    </section>
+    <section class="container">
+        <div id="links" class="Links"></div>
+        <div id="messages" class="messages"> </div>
+    </section>
+    <script>
+      linksHTML=document.getElementById('links')
+      messagesHTML=document.getElementById('messages')
+      //this code is used to simulate getting links from database
+      let linksNumber=document.getElementById('linksNumber')
+      linksNumber.addEventListener('change',()=>{
+        linksHTML.innerHTML=''
+        messagesHTML.innerHTML=''
+        messagesHTML.style.display='none'
+        let n=linksNumber.value
+        let linksArray=new Array()
+        for (let i=0;i<n;i++){
+            linksArray.push({link:'link'+(i+1),msg:'message'+(i+1)})
+        }
+        createLinkList(linksArray)
+      })
+
+      function createLinkList(linkList){
+       for (let l of linkList){
+        let linkHTML=document.createElement('a')
+        linkHTML.innerHTML=l.link
+        linksHTML.append(linkHTML)
+        linkHTML.addEventListener('click',()=>displayMsg(l.msg))
+       }
+      }
+      function displayMsg(msg){
+        messagesHTML.style.display='block'
+         messagesHTML.innerHTML=msg
+      }
+
+    </script>
+</body>
+</html>
